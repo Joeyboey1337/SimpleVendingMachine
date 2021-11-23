@@ -92,6 +92,4 @@ def restock():
                 print("======THANKYOU=====")
                 break
 
-
-restock()
     
