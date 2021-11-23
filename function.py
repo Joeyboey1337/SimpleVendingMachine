@@ -2,9 +2,7 @@
 drinks = ["COCA COLA","FANTA","SPRITE","POCARISWEAT","AQUA"]
 quantities = [10,10,10,10,10]
 price = [8000,7500,7000,9000,5000] #in IDR
-orders =[]
-order_qtc=[]
-order_price=[]
+
 
 def CheckStock():
     l= len(drinks)
@@ -13,6 +11,9 @@ def CheckStock():
         print(x+1,".",drinks[x]," : @IDR",price[x]," => ",quantities[x], "bottles available")
 
 def buy():
+    orders =[]
+    order_qtc=[]
+    order_price=[]
     cont = True
     x=0
     while(cont):
@@ -49,4 +50,48 @@ def buy():
         else:
             print("your input isn't valid , restart your order")
             buy()
-buy()
+
+def restock():
+    print("1. Add new products")
+    print("2. Restock existing products")
+    choose = int(input("=> "))
+    if(choose == 1):
+        l = len(drinks)
+        while(True):
+            name = input("Input Product's Name : ")
+            drinks.insert(l,name)
+            Idr = int(input("Input Product's Price (IDR) :"))
+            price.insert(l,Idr)
+            qtc = int(input("Input Product's Quantity (number only):"))
+            quantities.insert(l,qtc)
+            CheckStock()
+            cont = input("Do you want add product again ?(yes or no) :")
+            if(cont.casefold()=="yes"):
+                l+=1
+                continue
+            elif(cont.casefold()=="no"):
+                print("=====THANKYOU=====")
+                break
+
+    elif(choose == 2):
+        cont = True
+        while(cont):
+            CheckStock()
+            print("Product number you want to restock :")
+            n = int(input("=> "))
+            print("How much ? (number only): ")
+            qtc = int(input("(bottles => "))
+            quantities[n-1] +=qtc
+            print("Processing.....")
+            print("Done.....")
+            CheckStock()
+            x = input("restock again ? (yes or no) => ")
+            if(x.casefold() == "yes"):
+                continue
+            elif(x.casefold()):
+                print("======THANKYOU=====")
+                break
+
+
+restock()
+    
