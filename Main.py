@@ -16,7 +16,7 @@ while(choose != 2):
     elif(choose ==3):
         CheckStock()
     elif(choose==4):
-        password = input("Input Password")
+        password = input("Input Password : ")
         if(password == "Admin"):
             restock()
         else:
