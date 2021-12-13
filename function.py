@@ -19,21 +19,19 @@ def CheckStock():
 def buy():
     orders =[]
     order_qtc=[]
-    order_price=[]
     cont = True
     x=0
     while(cont):
         CheckStock()
         order = int(input("Input your order number (number only): "))
         order-=1
-        orders.insert(x,drinks[order].name)
+        orders.insert(x,drinks[order])
         qtc = int(input("How Much ? (number only) : "))
         if(drinks[order].qtc< 1 or drinks[order].qtc< qtc):
             print("Sorry our stock is not enough for your order")
-            product = drinks[order].name
+            product = drinks[order]
             orders.remove(product)
         else:
-            order_price.insert(x,drinks[order].price)
             drinks[order].qtc-=qtc
         order_qtc.insert(x,qtc)
 
@@ -48,14 +46,18 @@ def buy():
             total = 0
 
             for j in range(l):
-                format_drinks = f"{orders[j]:<15}"
-                format_price  = f"RP.{order_price[j]:,}"
+                format_drinks = f"{orders[j].name:<15}"
+                format_price  = f"RP.{orders[j].price:,}"
                 format_qtc    = f"x {order_qtc[j]:>3}"
-                format_result = f"= Rp{order_price[j]*order_qtc[j]:,}"
+                format_result = f"= Rp{orders[j].price*order_qtc[j]:,}"
                 print("||",j+1,".",format_drinks,"\t",format_price,format_qtc,format_result,"||")
-                total += order_price[j]*order_qtc[j]
+                total += orders[j].price*order_qtc[j]
                 format_total = f"TOTAL = Rp.{total:,}"
             print(format_total)
+            pay = int(input("Your Money:Rp"))
+            change = pay-total
+            format_change = f"CHANGE = Rp.{change:,}"
+            print(format_change)
             break
         else:
             print("your input isn't valid , restart your order")
